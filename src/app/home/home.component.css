@@ -1,0 +1,26 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .no-employees {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 18px;
+    color: #777;
+  }
+  
+  mat-card {
+    transition: transform 0.2s;
+  }
+  
+  mat-card:hover {
+    transform: translateY(-5px);
+  }
+  

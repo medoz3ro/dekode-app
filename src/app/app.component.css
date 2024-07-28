@@ -1,0 +1,5 @@
+/* Ensure the content area is positioned correctly below the fixed navbar */
+.content {
+    margin-top: 64px; /* This should match the height of the navbar */
+  }
+  

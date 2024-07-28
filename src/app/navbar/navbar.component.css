@@ -1,0 +1,58 @@
+mat-toolbar {
+  position: fixed; /* Fix the toolbar at the top */
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure the toolbar is above other content */
+  height: 64px; /* Set a height for the toolbar (adjust if needed) */
+  display: flex;
+  align-items: center;
+}
+
+/* Spacer to push items to the right */
+.spacer {
+  flex: 1;
+}
+
+/* Style for action buttons in the toolbar */
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+/* Dropdown menu styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+}
+
+.dropdown-content.show {
+  display: block;
+}
+
+.dropdown-content li {
+  list-style: none;
+  padding: 8px 16px;
+}
+
+.dropdown-content li a {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content li:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.main-content {
+  margin-top: 64px;
+}
