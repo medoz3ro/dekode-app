@@ -15,7 +15,10 @@ import { HomeComponent } from './home/home.component';
 import { CrudComponent } from './crud/crud.component'; // CRUD Component
 import { AboutMeComponent } from './about-me/about-me.component'; // AboutMe Component
 import { AppRoutingModule } from './app-routing.module';
-import { CloseDropdownDirective } from './close-dropdown.directive'; // Import CloseDropdownDirective
+import { CloseDropdownDirective } from './close-dropdown.directive';
+import { AddEmployeeComponent } from './employee-CRUD/add-employee/add-employee.component';
+import { EditEmployeeComponent } from './employee-CRUD/edit-employee/edit-employee.component';
+import { ViewEmployeeComponent } from './employee-CRUD/view-employee/view-employee.component'; // Import CloseDropdownDirective
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { CloseDropdownDirective } from './close-dropdown.directive'; // Import C
     HomeComponent,
     CrudComponent,
     AboutMeComponent,
-    CloseDropdownDirective // Declare CloseDropdownDirective
+    CloseDropdownDirective,
+    AddEmployeeComponent,
+    EditEmployeeComponent,
+    ViewEmployeeComponent // Declare CloseDropdownDirective
   ],
   imports: [
     BrowserModule,

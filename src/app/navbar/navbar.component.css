@@ -1,25 +1,22 @@
 mat-toolbar {
-  position: fixed; /* Fix the toolbar at the top */
+  position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000; /* Ensure the toolbar is above other content */
-  height: 64px; /* Set a height for the toolbar (adjust if needed) */
+  z-index: 1000;
+  height: 64px;
   display: flex;
   align-items: center;
 }
 
-/* Spacer to push items to the right */
 .spacer {
   flex: 1;
 }
 
-/* Style for action buttons in the toolbar */
 .actions {
   display: flex;
   align-items: center;
 }
 
-/* Dropdown menu styles */
 .dropdown {
   position: relative;
   display: inline-block;
@@ -32,6 +29,9 @@ mat-toolbar {
   min-width: 160px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1001;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 .dropdown-content.show {
@@ -40,17 +40,21 @@ mat-toolbar {
 
 .dropdown-content li {
   list-style: none;
-  padding: 8px 16px;
+  margin: 0;
+  border: 1px solid transparent; /* Ensure no border is affecting the hover area */
 }
 
 .dropdown-content li a {
   color: black;
   text-decoration: none;
   display: block;
+  padding: 8px 16px;
+  width: 100%;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
-.dropdown-content li:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+.dropdown-content li a:hover {
+  background-color: rgba(0, 0, 0, 0.04); /* Highlight the full width on hover */
 }
 
 .main-content {
