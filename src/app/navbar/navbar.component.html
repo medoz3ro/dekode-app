@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="navbar" appCloseDropdown>
+<mat-toolbar color="primary" class="navbar">
   <div class="dropdown">
     <button mat-icon-button aria-label="Menu icon" (click)="toggleDropdown()">
       <span class="material-symbols-outlined">menu</span>
@@ -8,11 +8,5 @@
       <li><a routerLink="/user-input" (click)="closeDropdown()">INPUT</a></li>
       <li><a routerLink="/about-me" (click)="closeDropdown()">ABOUT ME</a></li>
     </ul>
-  </div>
-  <span class="spacer"></span>
-  <div class="actions">
-    <button mat-icon-button aria-label="Search">
-      <span class="material-symbols-outlined">search</span>
-    </button>
   </div>
 </mat-toolbar>

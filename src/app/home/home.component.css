@@ -24,3 +24,11 @@
     transform: translateY(-5px);
   }
   
+  .mat-card-content .job-title {
+    margin-bottom: 0.5rem; /* Adjust as needed */
+  }
+  
+  .mat-card-content .date-of-birth {
+    margin-bottom: 0; /* Remove margin if desired */
+  }
+  

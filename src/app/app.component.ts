@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,14 @@ import { Component, HostListener } from '@angular/core';
 })
 export class AppComponent {
   dropdownOpen = false;
+
+  isHomePage: boolean = false;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      this.isHomePage = this.router.url === '/';
+    });
+  }
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
@@ -20,3 +29,5 @@ export class AppComponent {
     }
   }
 }
+
+

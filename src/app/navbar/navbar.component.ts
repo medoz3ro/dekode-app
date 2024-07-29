@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -6,21 +6,13 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  dropdownOpen = false;
+  dropdownOpen: boolean = false;
 
-  toggleDropdown() {
+  toggleDropdown(): void {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
-  closeDropdown() {
+  closeDropdown(): void {
     this.dropdownOpen = false;
-  }
-
-  @HostListener('document:click', ['$event.target'])
-  onDocumentClick(target: any) {
-    const insideDropdown = document.querySelector('.dropdown')?.contains(target);
-    if (!insideDropdown) {
-      this.closeDropdown();
-    }
   }
 }
