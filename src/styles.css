@@ -1,0 +1,13 @@
+.mat-icon-button:focus,
+.mat-icon-button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Optionally, you can add a custom focus style if needed */
+.mat-icon-button:focus-visible {
+  /* Customize focus styles if you want to maintain accessibility */
+  outline: 2px solid #f0f0f0; /* Example: light gray outline */
+  outline-offset: 2px;
+}

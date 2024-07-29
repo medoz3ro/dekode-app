@@ -1,0 +1,33 @@
+.container {
+    max-width: 600px;
+  }
+  
+  .card {
+    border-radius: 10px;
+  }
+  
+  .card-header {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  input.ng-valid[required], input.ng-valid.required {
+    border-left: 5px solid #42A948; /* green */
+  }
+  
+  input.ng-invalid:not(form) {
+    border-left: 5px solid #a94442; /* red */
+  }
+  
+  .btn {
+    width: 100%;
+  }
+  
+  .mt-5 {
+    margin-top: 3rem !important;
+  }
+  

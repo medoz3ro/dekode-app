@@ -60,3 +60,10 @@ mat-toolbar {
 .main-content {
   margin-top: 64px;
 }
+
+/* Remove the default blue outline from focus */
+.mat-icon-button:focus,
+.mat-icon-button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
