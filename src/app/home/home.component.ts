@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../employee.service';
-import { MatSelectChange } from '@angular/material/select'; // Import MatSelectChange
 
 @Component({
   selector: 'app-home',
@@ -14,6 +13,8 @@ export class HomeComponent implements OnInit {
   searchText: string = '';
   selectedJobTitle: string = '';
   jobTitles: string[] = [];
+  navbarDropdownOpen: boolean = false;
+  filterDropdownOpen: boolean = false;
 
   constructor(private employeeService: EmployeeService) { }
 
@@ -46,8 +47,25 @@ export class HomeComponent implements OnInit {
     this.filterEmployees();
   }
 
-  onJobTitleChange(event: MatSelectChange): void {
-    this.selectedJobTitle = event.value;
+  onJobTitleChange(jobTitle: string): void {
+    this.selectedJobTitle = jobTitle;
     this.filterEmployees();
+    this.closeFilterDropdown();
+  }
+
+  toggleNavbarDropdown(): void {
+    this.navbarDropdownOpen = !this.navbarDropdownOpen;
+  }
+
+  closeNavbarDropdown(): void {
+    this.navbarDropdownOpen = false;
+  }
+
+  toggleFilterDropdown(): void {
+    this.filterDropdownOpen = !this.filterDropdownOpen;
+  }
+
+  closeFilterDropdown(): void {
+    this.filterDropdownOpen = false;
   }
 }

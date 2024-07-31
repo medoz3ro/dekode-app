@@ -1,30 +1,40 @@
-<mat-form-field>
-  <input matInput (input)="onSearchTextChange($event)" placeholder="Search by name">
-</mat-form-field>
 
 
-<mat-form-field>
-  <mat-select placeholder="Filter by job title" (selectionChange)="onJobTitleChange($event)">
-    <mat-option *ngFor="let title of jobTitles" [value]="title">{{ title }}</mat-option>
-  </mat-select>
-</mat-form-field>
+<div class="main-content">
+  <div class="filter-search">
+    <mat-form-field class="search-field">
+      <input matInput (input)="onSearchTextChange($event)" placeholder="Search by name">
+    </mat-form-field>
+  
+    <div class="dropdown">
+      <button mat-icon-button (click)="toggleFilterDropdown()" aria-label="Filter by job title">
+        <span class="material-symbols-outlined">filter_list</span>
+      </button>
+      <ul class="dropdown-content" [class.show]="filterDropdownOpen">
+        <li><a (click)="onJobTitleChange('')">All Job Titles</a></li>
+        <li *ngFor="let title of jobTitles"><a (click)="onJobTitleChange(title)">{{ title }}</a></li>
+      </ul>
+    </div>
+  </div>
+  
 
-<div class="container" *ngIf="filteredEmployees.length">
-  <h2>Employees List</h2>
-  <mat-grid-list cols="2" rowHeight="2:1" gutterSize="20px">
-    <mat-grid-tile *ngFor="let employee of filteredEmployees">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>{{ employee.firstName }} {{ employee.lastName }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p class="mb-0"><strong>Job Title:</strong> {{ employee.jobTitle }}</p>
-          <p class="mb-0"><strong>Date of Birth:</strong> {{ employee.dateOfBirth | date: 'longDate' }}</p>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>
-<div *ngIf="!filteredEmployees.length" class="no-employees">
-  <p>No employees found.</p>
+  <div class="container" *ngIf="filteredEmployees.length">
+    <h2>Employees List</h2>
+    <mat-grid-list cols="2" rowHeight="2:1" gutterSize="20px">
+      <mat-grid-tile *ngFor="let employee of filteredEmployees">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ employee.firstName }} {{ employee.lastName }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="mb-0 mr-0"><strong>Job Title:</strong> {{ employee.jobTitle }}</p>
+            <p class="mb-0"><strong>Date of Birth:</strong> {{ employee.dateOfBirth | date: 'longDate' }}</p>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div *ngIf="!filteredEmployees.length" class="no-employees">
+    <p>No employees found.</p>
+  </div>
 </div>

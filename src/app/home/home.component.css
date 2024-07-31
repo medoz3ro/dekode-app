@@ -1,34 +1,109 @@
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .no-employees {
-    text-align: center;
-    margin-top: 50px;
-    font-size: 18px;
-    color: #777;
-  }
-  
-  mat-card {
-    transition: transform 0.2s;
-  }
-  
-  mat-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .mat-card-content .job-title {
-    margin-bottom: 0.5rem; /* Adjust as needed */
-  }
-  
-  .mat-card-content .date-of-birth {
-    margin-bottom: 0; /* Remove margin if desired */
-  }
-  
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.no-employees {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 18px;
+  color: #777;
+}
+
+mat-card {
+  transition: transform 0.2s;
+}
+
+mat-card:hover {
+  transform: translateY(-5px);
+}
+
+.mat-card-content .job-title {
+  margin-bottom: 0.5rem;
+  text-align: left; /* Align text to the left */
+}
+
+.mat-card-content .date-of-birth {
+  margin-bottom: 0;
+  text-align: left; /* Align text to the left */
+}
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 64px;
+  display: flex;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.main-content {
+  margin-top: 64px;
+  padding: 20px;
+}
+
+.filter-search{
+  text-align: center;
+}
+
+.search-field {
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.dropdown-content.show {
+  display: block;
+}
+
+.dropdown-content li {
+  list-style: none;
+  margin: 0;
+  border: 1px solid transparent;
+}
+
+.dropdown-content li a {
+  color: black;
+  text-decoration: none;
+  display: block;
+  padding: 8px 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dropdown-content li a:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.mat-icon-button:focus,
+.mat-icon-button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
