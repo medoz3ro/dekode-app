@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { EmployeeService } from '../employee.service';
 
 @Component({
@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   jobTitles: string[] = [];
   navbarDropdownOpen: boolean = false;
   filterDropdownOpen: boolean = false;
+  gridCols: number = 2; // Default number of columns
 
   constructor(private employeeService: EmployeeService) { }
 
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
         this.employees = data;
         this.filteredEmployees = data;
         this.setJobTitles(data);
+        this.updateGridCols(window.innerWidth); // Set initial grid columns based on screen width
       },
       (error: any) => {
         console.error('Error fetching employee data:', error);
@@ -67,5 +69,14 @@ export class HomeComponent implements OnInit {
 
   closeFilterDropdown(): void {
     this.filterDropdownOpen = false;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.updateGridCols((event.target as Window).innerWidth);
+  }
+
+  private updateGridCols(width: number): void {
+    this.gridCols = width < 600 ? 1 : 2; // Single column for mobile devices, 2 columns for larger screens
   }
 }

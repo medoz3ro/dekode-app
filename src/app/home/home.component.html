@@ -1,11 +1,9 @@
-
-
 <div class="main-content">
   <div class="filter-search">
     <mat-form-field class="search-field">
       <input matInput (input)="onSearchTextChange($event)" placeholder="Search by name">
     </mat-form-field>
-  
+
     <div class="dropdown">
       <button mat-icon-button (click)="toggleFilterDropdown()" aria-label="Filter by job title">
         <span class="material-symbols-outlined">filter_list</span>
@@ -16,24 +14,24 @@
       </ul>
     </div>
   </div>
-  
 
   <div class="container" *ngIf="filteredEmployees.length">
     <h2>Employees List</h2>
-    <mat-grid-list cols="2" rowHeight="2:1" gutterSize="20px">
-      <mat-grid-tile *ngFor="let employee of filteredEmployees">
+    <mat-grid-list [cols]="gridCols" rowHeight="2:1" gutterSize="20px" class="employee-grid">
+      <mat-grid-tile *ngFor="let employee of filteredEmployees" class="employee-tile">
         <mat-card>
           <mat-card-header>
             <mat-card-title>{{ employee.firstName }} {{ employee.lastName }}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <p class="mb-0 mr-0"><strong>Job Title:</strong> {{ employee.jobTitle }}</p>
-            <p class="mb-0"><strong>Date of Birth:</strong> {{ employee.dateOfBirth | date: 'longDate' }}</p>
+            <p class="job-title mb-0"><strong>Job Title:</strong> {{ employee.jobTitle }}</p>
+            <p class="date-of-birth"><strong>Date of Birth:</strong> {{ employee.dateOfBirth | date: 'longDate' }}</p>
           </mat-card-content>
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
+  
   <div *ngIf="!filteredEmployees.length" class="no-employees">
     <p>No employees found.</p>
   </div>

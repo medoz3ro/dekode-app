@@ -18,20 +18,37 @@ h2 {
 
 mat-card {
   transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 mat-card:hover {
   transform: translateY(-5px);
 }
 
+mat-card-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: auto;
+}
+
+mat-card-title {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+
 .mat-card-content .job-title {
   margin-bottom: 0.5rem;
-  text-align: left; /* Align text to the left */
+  text-align: left;
 }
 
 .mat-card-content .date-of-birth {
   margin-bottom: 0;
-  text-align: left; /* Align text to the left */
+  text-align: left;
 }
 
 mat-toolbar {
@@ -52,7 +69,7 @@ mat-toolbar {
   padding: 20px;
 }
 
-.filter-search{
+.filter-search {
   text-align: center;
 }
 
@@ -106,4 +123,23 @@ mat-toolbar {
 .mat-icon-button:focus-visible {
   outline: none;
   box-shadow: none;
+}
+
+.employee-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .employee-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.employee-tile {
+  display: flex;
+  align-items: stretch;
+  text-align: center;
 }
