@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +7,14 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
   dropdownOpen: boolean = false;
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event): void {
+    const target = event.target as HTMLElement;
+    if (this.dropdownOpen && !target.closest('.dropdown')) {
+      this.closeDropdown();
+    }
+  }
 
   toggleDropdown(): void {
     this.dropdownOpen = !this.dropdownOpen;

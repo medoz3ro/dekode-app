@@ -22,8 +22,6 @@ export class HomeComponent implements OnInit {
   sortBy: string = '';
   pageSize: number = 10;
   currentPage: number = 0;
-  sortDisabled: boolean = false;
-  pageSizeDisabled: boolean = false;
 
   constructor(
     private employeeService: EmployeeService, 
@@ -90,12 +88,9 @@ export class HomeComponent implements OnInit {
   }
 
   sortEmployees(criteria: string): void {
-    if (!this.sortDisabled) {
-      this.sortBy = criteria;
-      this.sortDisabled = true;
-      this.filterEmployees();
-      this.closeSortDropdown();
-    }
+    this.sortBy = criteria;
+    this.filterEmployees();
+    this.closeSortDropdown();
   }
 
   toggleFilterDropdown(event: Event): void {
@@ -137,13 +132,10 @@ export class HomeComponent implements OnInit {
   }
 
   onPageSizeChange(size: number): void {
-    if (!this.pageSizeDisabled) {
-      this.pageSize = size;
-      this.pageSizeDisabled = true;
-      this.currentPage = 0;
-      this.updatePagedEmployees();
-      this.closePageSizeDropdown();
-    }
+    this.pageSize = size;
+    this.currentPage = 0;
+    this.updatePagedEmployees();
+    this.closePageSizeDropdown();
   }
 
   updatePagedEmployees(): void {
