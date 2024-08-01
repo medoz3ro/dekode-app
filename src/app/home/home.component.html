@@ -1,11 +1,11 @@
-<div class="main-content">
+<div class="main-content" (click)="closeAllDropdowns()">
   <div class="filter-search">
     <mat-form-field class="search-field">
       <input matInput (input)="onSearchTextChange($event)" placeholder="Search by name">
     </mat-form-field>
 
     <div class="dropdown">
-      <button mat-icon-button (click)="toggleFilterDropdown()" aria-label="Filter by job title">
+      <button mat-icon-button (click)="toggleFilterDropdown($event)" aria-label="Filter by job title">
         <span class="material-symbols-outlined">filter_list</span>
       </button>
       <ul class="dropdown-content" [class.show]="filterDropdownOpen">
@@ -15,7 +15,7 @@
     </div>
 
     <div class="dropdown">
-      <button mat-icon-button (click)="toggleSortDropdown()" aria-label="Sort employees">
+      <button mat-icon-button (click)="toggleSortDropdown($event)" aria-label="Sort employees">
         <span class="material-symbols-outlined">sort</span>
       </button>
       <ul class="dropdown-content" [class.show]="sortDropdownOpen">
@@ -42,8 +42,13 @@
       </mat-grid-tile>
     </mat-grid-list>
     <div class="paginator-info">
-      <mat-paginator [length]="filteredEmployees.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)"></mat-paginator>
-    </div>
+      <mat-paginator
+      [length]="filteredEmployees.length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="onPageChange($event)"
+    ></mat-paginator>
+        </div>
   </div>
 
   <div *ngIf="!filteredEmployees.length" class="no-employees">

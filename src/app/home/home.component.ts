@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Renderer2, ElementRef } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { EmployeeService } from '../employee.service';
 
@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   searchText: string = '';
   selectedJobTitle: string = '';
   jobTitles: string[] = [];
-  navbarDropdownOpen: boolean = false;
   filterDropdownOpen: boolean = false;
   sortDropdownOpen: boolean = false;
   gridCols: number = 2; // Default number of columns
@@ -25,7 +24,11 @@ export class HomeComponent implements OnInit {
   pageSize: number = 10;
   currentPage: number = 0;
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(
+    private employeeService: EmployeeService, 
+    private renderer: Renderer2, 
+    private elRef: ElementRef
+  ) {}
 
   ngOnInit(): void {
     this.employeeService.getEmployees().subscribe(
@@ -40,6 +43,12 @@ export class HomeComponent implements OnInit {
         console.error('Error fetching employee data:', error);
       }
     );
+
+    this.renderer.listen('window', 'click', (event: Event) => {
+      if (!this.elRef.nativeElement.contains(event.target)) {
+        this.closeAllDropdowns();
+      }
+    });
   }
 
   setJobTitles(employees: any[]): void {
@@ -85,24 +94,20 @@ export class HomeComponent implements OnInit {
     this.closeSortDropdown();
   }
 
-  toggleNavbarDropdown(): void {
-    this.navbarDropdownOpen = !this.navbarDropdownOpen;
-  }
-
-  closeNavbarDropdown(): void {
-    this.navbarDropdownOpen = false;
-  }
-
-  toggleFilterDropdown(): void {
+  toggleFilterDropdown(event: Event): void {
+    event.stopPropagation();
     this.filterDropdownOpen = !this.filterDropdownOpen;
+    this.sortDropdownOpen = false;
   }
 
   closeFilterDropdown(): void {
     this.filterDropdownOpen = false;
   }
 
-  toggleSortDropdown(): void {
+  toggleSortDropdown(event: Event): void {
+    event.stopPropagation();
     this.sortDropdownOpen = !this.sortDropdownOpen;
+    this.filterDropdownOpen = false;
   }
 
   closeSortDropdown(): void {
@@ -128,5 +133,10 @@ export class HomeComponent implements OnInit {
 
   private updateGridCols(width: number): void {
     this.gridCols = width < 600 ? 1 : 2; // Single column for mobile devices, 2 columns for larger screens
+  }
+
+  public closeAllDropdowns(): void {
+    this.filterDropdownOpen = false;
+    this.sortDropdownOpen = false;
   }
 }
