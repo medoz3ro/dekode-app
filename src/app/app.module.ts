@@ -11,6 +11,8 @@ import { MatGridListModule } from '@angular/material/grid-list'; // Grid list co
 import { MatCardModule } from '@angular/material/card'; // Card component
 import { MatInputModule } from '@angular/material/input'; // Input component
 import { MatFormFieldModule } from '@angular/material/form-field'; // Form field component
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 // Angular Forms and HTTP
 import { HttpClientModule } from '@angular/common/http'; // HTTP client for API calls
@@ -57,7 +59,8 @@ import { MatOptionModule } from '@angular/material/core';
     FormsModule,
     MatSelectModule,
     MatOptionModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,3 +1,5 @@
+/* Existing CSS */
+
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -82,6 +84,7 @@ mat-toolbar {
   position: relative;
   display: inline-block;
   margin-bottom: 20px;
+  margin-right: 10px;
 }
 
 .dropdown-content {
@@ -143,3 +146,9 @@ mat-toolbar {
   align-items: stretch;
   text-align: center;
 }
+
+::ng-deep .mat-mdc-paginator-container {
+  justify-content: center !important; /* Override flex-end */
+}
+
+

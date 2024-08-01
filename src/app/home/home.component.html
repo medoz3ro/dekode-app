@@ -13,12 +13,23 @@
         <li *ngFor="let title of jobTitles"><a (click)="onJobTitleChange(title)">{{ title }}</a></li>
       </ul>
     </div>
+
+    <div class="dropdown">
+      <button mat-icon-button (click)="toggleSortDropdown()" aria-label="Sort employees">
+        <span class="material-symbols-outlined">sort</span>
+      </button>
+      <ul class="dropdown-content" [class.show]="sortDropdownOpen">
+        <li><a (click)="sortEmployees('firstName')">Sort by First Name</a></li>
+        <li><a (click)="sortEmployees('lastName')">Sort by Last Name</a></li>
+        <li><a (click)="sortEmployees('jobTitle')">Sort by Job Title</a></li>
+      </ul>
+    </div>
   </div>
 
   <div class="container" *ngIf="filteredEmployees.length">
     <h2>Employees List</h2>
     <mat-grid-list [cols]="gridCols" rowHeight="2:1" gutterSize="20px" class="employee-grid">
-      <mat-grid-tile *ngFor="let employee of filteredEmployees" class="employee-tile">
+      <mat-grid-tile *ngFor="let employee of pagedEmployees" class="employee-tile">
         <mat-card>
           <mat-card-header>
             <mat-card-title>{{ employee.firstName }} {{ employee.lastName }}</mat-card-title>
@@ -30,8 +41,11 @@
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
+    <div class="paginator-info">
+      <mat-paginator [length]="filteredEmployees.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)"></mat-paginator>
+    </div>
   </div>
-  
+
   <div *ngIf="!filteredEmployees.length" class="no-employees">
     <p>No employees found.</p>
   </div>
