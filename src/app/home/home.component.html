@@ -9,7 +9,7 @@
         <span class="material-symbols-outlined">filter_list</span>
       </button>
       <ul class="dropdown-content" [class.show]="filterDropdownOpen">
-        <li><a (click)="onJobTitleChange('')">All Job Titles</a></li>
+        <li class="li-header"><a (click)="onJobTitleChange('')">All Job Titles</a></li>
         <li *ngFor="let title of jobTitles"><a (click)="onJobTitleChange(title)">{{ title }}</a></li>
       </ul>
     </div>
@@ -19,9 +19,24 @@
         <span class="material-symbols-outlined">sort</span>
       </button>
       <ul class="dropdown-content" [class.show]="sortDropdownOpen">
-        <li><a (click)="sortEmployees('firstName')">Sort by First Name</a></li>
-        <li><a (click)="sortEmployees('lastName')">Sort by Last Name</a></li>
-        <li><a (click)="sortEmployees('jobTitle')">Sort by Job Title</a></li>
+        <li class="li-header" [class.disabled]="sortDisabled">Sort by:</li>
+        <li class="li-options" [class.disabled]="sortDisabled"><a (click)="sortEmployees('firstName')">First Name</a></li>
+        <li class="li-options" [class.disabled]="sortDisabled"><a (click)="sortEmployees('lastName')">Last Name</a></li>
+        <li class="li-options" [class.disabled]="sortDisabled"><a (click)="sortEmployees('jobTitle')">Job Title</a></li>
+      </ul>
+    </div>
+
+    <div class="dropdown">
+      <button mat-icon-button (click)="togglePageSizeDropdown($event)" aria-label="Select items per page">
+        <span class="material-symbols-outlined">view_list</span>
+      </button>
+      <ul class="dropdown-content" [class.show]="pageSizeDropdownOpen">
+        <li class="li-header" [class.disabled]="pageSizeDisabled">Items per page:</li>
+        <li class="li-options" [class.disabled]="pageSizeDisabled"><a (click)="onPageSizeChange(4)">4</a></li>
+        <li class="li-options" [class.disabled]="pageSizeDisabled"><a (click)="onPageSizeChange(8)">8</a></li>
+        <li class="li-options" [class.disabled]="pageSizeDisabled"><a (click)="onPageSizeChange(12)">12</a></li>
+        <li class="li-options" [class.disabled]="pageSizeDisabled"><a (click)="onPageSizeChange(16)">16</a></li>
+        <li class="li-options" [class.disabled]="pageSizeDisabled"><a (click)="onPageSizeChange(20)">20</a></li>
       </ul>
     </div>
   </div>
@@ -43,12 +58,12 @@
     </mat-grid-list>
     <div class="paginator-info">
       <mat-paginator
-      [length]="filteredEmployees.length"
-      [pageSize]="pageSize"
-      [pageSizeOptions]="[5, 10, 20]"
-      (page)="onPageChange($event)"
-    ></mat-paginator>
-        </div>
+        [length]="filteredEmployees.length"
+        [pageSize]="pageSize"
+        [pageIndex]="currentPage"
+        (page)="onPageChange($event)">
+      </mat-paginator>
+    </div>
   </div>
 
   <div *ngIf="!filteredEmployees.length" class="no-employees">

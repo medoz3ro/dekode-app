@@ -17,12 +17,13 @@ export class HomeComponent implements OnInit {
   jobTitles: string[] = [];
   filterDropdownOpen: boolean = false;
   sortDropdownOpen: boolean = false;
-  gridCols: number = 2; // Default number of columns
+  pageSizeDropdownOpen: boolean = false;
+  gridCols: number = 2;
   sortBy: string = '';
-  
-  // Pagination properties
   pageSize: number = 10;
   currentPage: number = 0;
+  sortDisabled: boolean = false;
+  pageSizeDisabled: boolean = false;
 
   constructor(
     private employeeService: EmployeeService, 
@@ -36,7 +37,7 @@ export class HomeComponent implements OnInit {
         this.employees = data;
         this.filteredEmployees = data;
         this.setJobTitles(data);
-        this.updateGridCols(window.innerWidth); // Set initial grid columns based on screen width
+        this.updateGridCols(window.innerWidth);
         this.updatePagedEmployees();
       },
       (error: any) => {
@@ -62,7 +63,7 @@ export class HomeComponent implements OnInit {
 
     this.sortFilteredEmployees(filtered);
     this.filteredEmployees = filtered;
-    this.currentPage = 0; // Reset to the first page
+    this.currentPage = 0;
     this.updatePagedEmployees();
   }
 
@@ -89,15 +90,19 @@ export class HomeComponent implements OnInit {
   }
 
   sortEmployees(criteria: string): void {
-    this.sortBy = criteria;
-    this.filterEmployees();
-    this.closeSortDropdown();
+    if (!this.sortDisabled) {
+      this.sortBy = criteria;
+      this.sortDisabled = true;
+      this.filterEmployees();
+      this.closeSortDropdown();
+    }
   }
 
   toggleFilterDropdown(event: Event): void {
     event.stopPropagation();
     this.filterDropdownOpen = !this.filterDropdownOpen;
     this.sortDropdownOpen = false;
+    this.pageSizeDropdownOpen = false;
   }
 
   closeFilterDropdown(): void {
@@ -108,16 +113,37 @@ export class HomeComponent implements OnInit {
     event.stopPropagation();
     this.sortDropdownOpen = !this.sortDropdownOpen;
     this.filterDropdownOpen = false;
+    this.pageSizeDropdownOpen = false;
   }
 
   closeSortDropdown(): void {
     this.sortDropdownOpen = false;
   }
 
+  togglePageSizeDropdown(event: Event): void {
+    event.stopPropagation();
+    this.pageSizeDropdownOpen = !this.pageSizeDropdownOpen;
+    this.filterDropdownOpen = false;
+    this.sortDropdownOpen = false;
+  }
+
+  closePageSizeDropdown(): void {
+    this.pageSizeDropdownOpen = false;
+  }
+
   onPageChange(event: PageEvent): void {
-    this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
     this.updatePagedEmployees();
+  }
+
+  onPageSizeChange(size: number): void {
+    if (!this.pageSizeDisabled) {
+      this.pageSize = size;
+      this.pageSizeDisabled = true;
+      this.currentPage = 0;
+      this.updatePagedEmployees();
+      this.closePageSizeDropdown();
+    }
   }
 
   updatePagedEmployees(): void {
@@ -132,11 +158,12 @@ export class HomeComponent implements OnInit {
   }
 
   private updateGridCols(width: number): void {
-    this.gridCols = width < 600 ? 1 : 2; // Single column for mobile devices, 2 columns for larger screens
+    this.gridCols = width < 600 ? 1 : 2;
   }
 
   public closeAllDropdowns(): void {
     this.filterDropdownOpen = false;
     this.sortDropdownOpen = false;
+    this.pageSizeDropdownOpen = false;
   }
 }
